@@ -3,12 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My To-Do List</title>
+  <title>Quiz Application</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <style>
-
-    body {
+    /* General styling */
+    body  {
       font-family: Arial, sans-serif;
-      background-image: url('https://e1.pxfuel.com/desktop-wallpaper/155/255/desktop-wallpaper-nice-website-backgrounds-nice-background-pic.jpg');
+      background-image: url('https://images.pexels.com/photos/1227515/pexels-photo-1227515.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
       background-size: cover;
       background-repeat: no-repeat;
       background-attachment: fixed;
@@ -17,98 +18,354 @@
     }
 
     .container {
-      max-width: 600px;
-      margin: 50px auto;
-      background-color: rgba(255, 255, 255, 0.8); 
+      flex: 1;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    /* Navigation Bar */
+    .navbar {
+      background-color: #ffffff; /* White background color */
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .navbar-brand {
+      font-weight: bold;
+      color: #343a40; /* Dark color for navbar text */
+    }
+
+    .navbar-nav .nav-link {
+      color: #343a40; /* Dark color for navbar links */
+      margin-right: 20px;
+    }
+
+    .navbar-nav .nav-link:hover {
+      color: #007bff; /* Blue color on hover */
+    }
+
+    /* Sections */
+    .section {
+      background-color: #ffffff; /* Light background color for sections */
       padding: 20px;
       border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
     }
 
-    h1 {
-      text-align: center;
+    .card {
+      margin-bottom: 20px;
+      transition: transform 0.2s ease;
     }
 
-    input[type="text"] {
-      width: 70%;
-      padding: 10px;
-      margin-bottom: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
     }
 
-    button {
-      padding: 10px 20px;
-      background-color: #4CAF50;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
+    .card-img-top {
+      height: 200px; /* Fixed height for card images */
+      object-fit: cover;
     }
 
-    button:hover {
-      background-color: #45a049;
+    /* Footer */
+    footer {
+      background-color: #343a40; /* Dark background color for footer */
+      color: #ffffff; /* Text color */
+      padding: 20px 0;
+      width: 100%;
     }
 
-    ul {
-      list-style-type: none;
-      padding: 0;
+    footer p {
+      margin-bottom: 0;
     }
 
-    li {
-      padding: 10px;
-      background-color: #f9f9f9;
-      margin-bottom: 5px;
-      border-radius: 5px;
-    }
-
-    li.checked {
-      background-color: #4CAF50;
-      color: white;
-      text-decoration: line-through;
-    }
-
-    #tomorrowList {
-      margin-top: 30px;
-    }
-
-    #tomorrowList h2 {
-      text-align: center;
-    }
-
-    #tomorrowList input[type="date"] {
-      width: 70%;
-      padding: 10px;
-      margin-bottom: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .navbar-nav .nav-link {
+        margin-right: 10px;
+      }
     }
   </style>
 </head>
 <body>
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">QuizApp</a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#" onclick="showSection('about')">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" onclick="showSection('topics')">Take Quiz</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" onclick="showSection('testimonials')">Testimonials</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
   <div class="container">
-    <h1>Today's To-Do List</h1>
-    <form id="taskForm" onsubmit="return addTask('taskList')">
-      <input type="text" id="taskInput" name="taskInput" placeholder="Add a new task" required>
-      <button type="submit">Add Task</button>
-    </form>
-    <ul id="taskList"></ul>
-    <form onsubmit="return clearAll('taskList')">
-      <button type="submit">Clear All</button>
-    </form>
+    <!-- Introduction Image Card -->
+    <div id="introductionImageCard" class="card mb-3 section">
+      <!-- Replace with your own image source link -->
+      <img src="https://e1.pxfuel.com/desktop-wallpaper/401/742/desktop-wallpaper-college-students-students.jpg" class="card-img-top" alt="Introduction Image">
+      <div class="card-body">
+     
+        <centre><p class="card-text">Welcome to QuizApp! Test your knowledge on various topics and enjoy learning.</p></centre>
+      </div>
+    </div>
+
+    <!-- About Section -->
+    <div id="about" class="section" style="display: none;">
+      <h2>About QuizApp</h2>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card">
+            <!-- Replace with your own image source link -->
+            <img src="https://media.istockphoto.com/id/579770584/photo/geography-worldwide-explorer-continent-country-concept.jpg?s=612x612&w=0&k=20&c=SlyNRtxZZz0Lkwh_bC4w-yiIhhearZwVTQXEpVHz2kA=" class="card-img-top" alt="Purpose Image">
+            <div class="card-body">
+              <h5 class="card-title">Purpose</h5>
+              <p class="card-text">QuizApp aims to provide an engaging platform for testing and improving your knowledge.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <!-- Replace with your own image source link -->
+            <img src="https://image.jimcdn.com/app/cms/image/transf/dimension=1040x10000:format=jpg/path/s2217cd0bb1220415/image/i2fa63f78668f5482/version/1704057547/chronology.jpg" class="card-img-top" alt="Features Image">
+            <div class="card-body">
+              <h5 class="card-title">Features</h5>
+              <p class="card-text">Enjoy quizzes on General Knowledge, Geography, History, and Basic Maths.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <!-- Replace with your own image source link -->
+            <img src="https://media.istockphoto.com/id/1219382595/vector/math-equations-written-on-a-blackboard.jpg?s=612x612&w=0&k=20&c=ShVWsMm2SNCNcIjuWGtpft0kYh5iokCzu0aHPC2fV4A=" class="card-img-top" alt="Team Image">
+            <div class="card-body">
+              <h5 class="card-title">Team</h5>
+              <p class="card-text">QuizApp is developed by a team passionate about education and learning.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Testimonials Section -->
+    <div id="testimonials" class="section" style="display: none;">
+      <h2>Testimonials</h2>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-body">
+              <p class="card-text">"This quiz app is fantastic! I've learned so much." - Harshavardhan</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-body">
+              <p class="card-text">"I love how interactive and easy-to-use this app is." - Sudeep</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-body">
+              <p class="card-text">"The quizzes are challenging and fun. Highly recommend!" - Yuvraj</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-body">
+              <p class="card-text">"A great way to test and improve your knowledge." - Tarun G</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topics Section (Sample quiz topics) -->
+    <div id="topics" class="section" style="display: none;">
+      <h2>Choose a Topic</h2>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card" onclick="startQuiz('generalKnowledge')">
+            <div class="card-body">
+              <h5 class="card-title">General Knowledge</h5>
+              <p class="card-text">Test your general knowledge with this quiz.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card" onclick="startQuiz('geography')">
+            <div class="card-body">
+              <h5 class="card-title">Geography</h5>
+              <p class="card-text">Check your knowledge on geography with this quiz.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card" onclick="startQuiz('history')">
+            <div class="card-body">
+              <h5 class="card-title">History</h5>
+              <p class="card-text">How well do you know history? Take this quiz to find out.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card" onclick="startQuiz('basicMaths')">
+            <div class="card-body">
+              <h5 class="card-title">Basic Maths</h5>
+              <p class="card-text">Test your basic maths skills with this quiz.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quiz Section (Sample quiz questions, dynamic content) -->
+    <div id="quiz" class="section" style="display: none;">
+      <h2 id="quizTitle">Quiz Title</h2>
+      <div id="quizContainer">
+        <!-- Quiz questions will be dynamically inserted here -->
+      </div>
+      <button class="btn btn-primary" onclick="showSection('topics')">Back to Topics</button>
+    </div>
+
   </div>
 
-  <div class="container" id="tomorrowList">
-    <h2>Tomorrow's To-Do List</h2>
-    <form onsubmit="return addTask('tomorrowTaskList')">
-      <input type="text" id="tomorrowTaskInput" name="tomorrowTaskInput" placeholder="Add a new task" required>
-      <input type="date" id="tomorrowDateInput" name="tomorrowDateInput" required>
-      <button type="submit">Add Task</button>
-    </form>
-    <ul id="tomorrowTaskList"></ul>
-    <form onsubmit="return clearAll('tomorrowTaskList')">
-      <button type="submit">Clear All</button>
-    </form>
-  </div>
+<!-- Footer -->
+<footer class="text-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <h5>Contact Information</h5>
+          <p>Phone: 7019176137 </p>
+          <p>Email: moinuddin.ahmed292003@gmail.com</p>
+          <p>Address: 3rd Cross P.G Layout, Tumkur-01, Karnataka, India</p>
+        </div>
+        <div class="col-md-4">
+          <h5>Follow Us</h5>
+          <p>
+            <a href="moinuddin.ahmed292003@gmail.com" target="_blank">Gmail</a>
+          </p>
+          <p>
+            <a href="https://www.instagram.com/example/" target="_blank">Instagram</a>
+          </p>
+        </div>
+        <div class="col-md-4">
+          <h5>Legal</h5>
+          <p>Terms of Use</p>
+          <p>Privacy Policy</p>
+        </div>
+      </div>
+      <p>&copy; 2024 QuizApp. All rights reserved.</p>
+    </div>
+  </footer>
+  
+  <!-- JavaScript -->
+  <script>
+    // Quiz data (questions for each topic)
+    const quizData = {
+      generalKnowledge: [
+        { question: "What is the capital of France?", options: ["Paris", "London", "Berlin", "Madrid"], answer: "Paris" },
+        { question: "Who painted the Mona Lisa?", options: ["Vincent van Gogh", "Leonardo da Vinci", "Pablo Picasso", "Claude Monet"], answer: "Leonardo da Vinci" },
+        { question: "Which planet is known as the Red Planet?", options: ["Mars", "Venus", "Jupiter", "Saturn"], answer: "Mars" },
+        { question: "What is the tallest mammal?", options: ["Elephant", "Giraffe", "Rhino", "Horse"], answer: "Giraffe" },
+        { question: "Who wrote 'To Kill a Mockingbird'?", options: ["J.K. Rowling", "Harper Lee", "Stephen King", "Charles Dickens"], answer: "Harper Lee" }
+      ],
+      geography: [
+        { question: "Which continent is the largest by land area?", options: ["Asia", "Africa", "North America", "Europe"], answer: "Asia" },
+        { question: "Where is the Great Barrier Reef located?", options: ["Australia", "Hawaii", "Caribbean", "Mediterranean Sea"], answer: "Australia" },
+        { question: "Which river runs through Egypt?", options: ["Amazon", "Nile", "Mississippi", "Danube"], answer: "Nile" },
+        { question: "What is the largest desert in the world?", options: ["Sahara Desert", "Arabian Desert", "Kalahari Desert", "Gobi Desert"], answer: "Sahara Desert" },
+        { question: "What is the capital of Canada?", options: ["Toronto", "Ottawa", "Vancouver", "Montreal"], answer: "Ottawa" }
+      ],
+      history: [
+        { question: "In which year did World War I begin?", options: ["1914", "1918", "1939", "1945"], answer: "1914" },
+        { question: "Who was the first President of the United States?", options: ["Thomas Jefferson", "George Washington", "Abraham Lincoln", "John Adams"], answer: "George Washington" },
+        { question: "Which ancient civilization built the Machu Picchu?", options: ["Maya", "Inca", "Aztec", "Roman"], answer: "Inca" },
+        { question: "Who was the first person to step on the Moon?", options: ["Neil Armstrong", "Buzz Aldrin", "Yuri Gagarin", "John Glenn"], answer: "Neil Armstrong" },
+        { question: "What was the name of the ship that brought the Pilgrims to America in 1620?", options: ["Mayflower", "Santa Maria", "Nina", "Victoria"], answer: "Mayflower" }
+      ],
+      basicMaths: [
+        { question: "What is 5 + 7?", options: ["11", "12", "13", "14"], answer: "12" },
+        { question: "What is 8 × 6?", options: ["42", "46", "48", "56"], answer: "48" },
+        { question: "What is 25 ÷ 5?", options: ["3", "4", "5", "6"], answer: "5" },
+        { question: "What is 12 - 9?", options: ["1", "2", "3", "4"], answer: "3" },
+        { question: "What is the square root of 64?", options: ["6", "7", "8", "9"], answer: "8" }
+      ]
+    };
+
+    // Function to start quiz for a specific topic
+    function startQuiz(topic) {
+      const quizTitleElement = document.getElementById('quizTitle');
+      const quizContainerElement = document.getElementById('quizContainer');
+      const topicName = capitalizeFirstLetter(topic);
+
+      // Set quiz title
+      quizTitleElement.textContent = `${topicName} Quiz`;
+
+      // Clear previous quiz questions if any
+      quizContainerElement.innerHTML = '';
+
+      // Add questions for the selected topic
+      quizData[topic].forEach((questionObj, index) => {
+        const questionElement = `
+          <div class="card mb-3">
+            <div class="card-body">
+              <h5 class="card-title">Question ${index + 1}</h5>
+              <p class="card-text">${questionObj.question}</p>
+              <div id="options-${index}" class="btn-group-vertical">
+                ${questionObj.options.map(option => `<button type="button" class="btn btn-outline-primary" onclick="checkAnswer('${option}', '${questionObj.answer}', ${index})">${option}</button>`).join('')}
+              </div>
+              <p id="result-${index}" class="mt-2"></p>
+            </div>
+          </div>
+        `;
+        quizContainerElement.innerHTML += questionElement;
+      });
+
+      // Show the quiz section
+      showSection('quiz');
+    }
+
+    // Function to check selected answer against correct answer
+    function checkAnswer(selectedAnswer, correctAnswer, questionIndex) {
+      const resultElement = document.getElementById(`result-${questionIndex}`);
+      if (selectedAnswer === correctAnswer) {
+        resultElement.textContent = "Correct!";
+        resultElement.classList.add('text-success');
+      } else {
+        resultElement.textContent = `Incorrect. The correct answer is ${correctAnswer}.`;
+        resultElement.classList.add('text-danger');
+      }
+    }
+
+    // Function to show/hide sections
+    function showSection(sectionId) {
+      const sections = ['about', 'topics', 'testimonials', 'quiz'];
+      sections.forEach(section => {
+        const element = document.getElementById(section);
+        if (section === sectionId) {
+          element.style.display = 'block';
+        } else {
+          element.style.display = 'none';
+        }
+      });
+    }
+
+    // Helper function to capitalize first letter of a string
+    function capitalizeFirstLetter(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+  </script>
+
 </body>
 </html>
